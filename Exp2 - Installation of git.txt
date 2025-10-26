@@ -1,0 +1,127 @@
+Exp2
+Aim: To perform installation of Git and work on local and remote Git repositories.
+
+Steps:
+1. cd Desktop/
+2. mkdir git-demo
+3. cd git-demo
+4. ls
+5. pwd
+
+To update all local package index for ubuntu:
+6. sudo su
+7. apt update
+8. apt-get install git
+9. git –version
+
+Customize and configure your Git Account:  
+10. git config --global user.name "<your-name>"
+11. git config --global user.email "<your-email>"
+12. git config --list
+
+To Integrate Git account with Github:
+13. Go to www.github.com 
+14. Sign-in to your account 
+15. Create a Repository
+
+In local repository initiate the directory to make it a git repository (.git file must be added inside that folder after initiation)
+16. git init 
+
+Now Clone the Remote Repository into your Local Repository ie; Ubuntu Operating System: 
+17. git clone "URL.git"
+18. ls -ltr
+After this you get your repo name as ex. - "demo"
+19. cd demo
+20. cat README.md
+
+Now Create a python file factorial.py in Local Repository: 
+21. gedit factorial.py
+
+1st program:
+num = int(input("Enter a number: ")) 
+factorial = 1 
+if num < 0: 
+print("Factorial does not exist for negative numbers") 
+elif num == 0: 
+print("The factorial of 0 is 1") 
+else: 
+for i in range(1, num + 1): 
+factorial = factorial * i 
+print("The factorial of", num, "is", factorial)
+
+OR
+
+2nd program:
+# factorial of given number 
+def factorial(n): 
+if n < 0: 
+return 0 
+elif n == 0 or n == 1: 
+return 1 
+else: 
+fact = 1 
+while(n > 1): 
+fact *= n 
+n -= 1 
+return fact 
+# Driver Code 
+num = 5 
+print("Factorial of",num,"is", 
+factorial(num)) 
+
+Now we will apply some git commands to add, commit and push factorial.py file to remote 
+repository: Firstly To View Uncommitted File:
+22. git status
+
+The file factorial.py shown in red color is untracked (it means not tracked by git till now). So to add to the git versioning:
+23. git add factorial.py
+24. git status
+
+To start first commit:
+25. git commit -m “First Python File” 
+26. git status
+
+To Push your changes from local repository to Github/remote Repository:
+27. git push origin main
+Enter username and password
+
+It says support for password authentication was removed on August  13, 2021. So we need a new kind of method: 
+Goto your Github Account→User Profile→Settings→Developer Settings→Personal Access Token→Token(classic)→ Generate New token→Generate New Token(Classic)
+
+Click on Generate Token 
+Copy the token and paste it some location: 
+#git remote set-url origin https://tokenhere@github.com/user_name/repo_name
+Such as:
+28. git remote set-url origin https://ghp4NZJzecVfkbiMEPOfbR0fIzYnl6kel4fTg9G@github.com/sujataoak799/gitdemo11072025 
+
+Again try to Push your changes to Github Repository:
+29. git push origin main
+
+Now I create a new file on my github page: Add file->create new file→Commit changes 
+30. Click on Commit Changes 
+
+But this new file is not reflected in my local repository 
+31. git pull
+32. ls -ltr
+33. cat filename
+
+To see the logs in oneline  like username, email -id, date, time of creation.
+34. git log
+
+To Print list of all commits:
+35. git log --oneline
+
+To show repository id and other detail or want to know about a particular commit:
+36. git show <commit-id>
+
+To see the difference in the content of file between first and second commit. 
+37. git diff <latest commit-id> <commit-id>
+
+38. gedit filename
+39. git status
+40. git add .
+41. git status
+42. git commit -m "Added"
+
+Creating a latter commit and reverting back to see the initial/original content
+43. git revert<secondcommitID> 
