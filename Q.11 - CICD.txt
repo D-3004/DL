@@ -1,0 +1,142 @@
+🧩 CI/CD Pipeline Simulation Steps
+
+(Perform all steps in your local terminal)
+
+Step 1: Create Project Folders
+
+📂 You’ll create everything inside your Desktop for simplicity.
+
+cd ~/Desktop
+mkdir cicd-demo
+cd cicd-demo
+
+
+Now create the folders inside this project:
+mkdir app
+mkdir staging_server
+mkdir production_server
+
+
+✅ Folder structure will look like this:
+
+Desktop/
+ └── cicd-demo/
+     ├── app/
+     ├── staging_server/
+     └── production_server/
+
+Step 2: Create Application File
+Now create your application file inside the app folder:
+gedit app/index.html
+
+Paste the following code and save the file (Ctrl + S → Close editor):
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CICD Demo</title>
+</head>
+<body>
+<h1>App Version 1.0</h1>
+<p>This page was deployed by a CICD pipeline.</p>
+</body>
+</html>
+
+Step 3: Create Continuous Delivery Script
+📄 Create the script inside the same main folder (cicd-demo):
+gedit pipeline_continuous_delivery.sh
+
+Paste the following content and save:
+
+#!/bin/bash
+
+echo "PIPELINE STARTED..."
+echo "Step 1: Running build (simulated)..."
+sleep 1
+
+echo "Step 2: Running tests (simulated)..."
+sleep 1
+echo "CI TESTS PASSED!"
+echo "---------------------------------"
+
+echo "Step 3: Deploying to Staging Server..."
+cp app/index.html staging_server/
+echo "DEPLOYED to staging_server/"
+echo "---------------------------------"
+
+echo "Ready for Production."
+read -p "Press [Enter] to approve deployment to PRODUCTION..."
+
+echo "Step 4: Deploying to Production Server..."
+cp app/index.html production_server/
+echo "---------------------------------"
+echo "PIPELINE FINISHED. Deployed to Production."
+
+
+Step 4: Make the Script Executable
+Run this inside the cicd-demo folder:
+
+chmod +x pipeline_continuous_delivery.sh
+
+
+Step 5: Run Continuous Delivery Pipeline
+Still inside cicd-demo, run:
+
+./pipeline_continuous_delivery.sh
+
+When you see this prompt:
+
+Ready for Production.
+Press [Enter] to approve deployment to PRODUCTION...
+Press Enter to continue.
+Then verify the result:
+
+cat production_server/index.html
+✅ You should see your HTML content.
+
+
+Step 6: Create Continuous Deployment Script
+📄 Copy your previous script and edit it (inside same cicd-demo folder):
+
+cp pipeline_continuous_delivery.sh pipeline_continuous_deployment.sh
+gedit pipeline_continuous_deployment.sh
+
+Delete these two lines (the manual approval step):
+
+echo "Ready for Production."
+read -p "Press [Enter] to approve deployment to PRODUCTION..."
+
+Save and close the file.
+
+
+Step 7: Prepare Production Server for Testing
+To see the change after auto-deployment, first replace production file with fake data:
+echo "This is the old, broken version" > production_server/index.html
+
+
+Step 8: Run Continuous Deployment Pipeline
+Now run the automatic pipeline:
+
+./pipeline_continuous_deployment.sh
+
+Then verify:
+
+cat production_server/index.html
+
+
+✅ You should now see the updated HTML content automatically deployed
+
+
+View in Browser (Visual Check)
+
+If you want to see it like a web page:
+
+Open your file explorer.
+
+Go to the project folder you created (example: Desktop/cicd-demo/production_server/).
+
+Double-click on index.html.
+
+It will open in your browser and show:
+“App Version 1.0 — This page was deployed by a CICD pipeline.”
+
